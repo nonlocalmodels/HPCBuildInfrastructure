@@ -85,6 +85,11 @@ while [[ -n $3 ]]; do
             export BUILD_TARGET_BLAZE_ITERATIVE=
             shift
         ;;
+        yamlcpp)
+            echo 'Target hpx will build.'
+            export BUILD_TARGET_YAMLCPP=
+            shift
+        ;;
         *)
             echo 'Unrecognizable argument passesd.' >&2
             print_usage_abort
@@ -104,6 +109,7 @@ if [[ -z ${!BUILD_TARGET_@} ]]; then
     export BUILD_TARGET_HPX=
     export BUILD_TARGET_BLAZE=
     export BUILD_TARGET_BLAZE_ITERATIVE=
+    export BUILD_TARGET_YAMLCPP=
 fi
 
 ################################################################################
@@ -178,6 +184,11 @@ source gcc-config.sh
 (
     echo "Building BLAZE ITERATIVE"
     ./build-blaze-iterative.sh
+)
+[[ -n ${BUILD_TARGET_YAMLCPP+x} ]] && \
+(
+    echo "Building YAMLCPP"
+    ./build-yamlcpp.sh
 )
 ################################################################################
 # Octo-tiger
