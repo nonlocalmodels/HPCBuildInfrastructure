@@ -6,7 +6,18 @@
 
 Please edit the config.sh to specify the version of all dependencies you like 
 to use. Even if you are not building the gcc with this script, you should 
-provide the version number so the module files will work correctly. 
+provide the version number so the module files will work correctly. Following
+dependencies are needed to build the code
+
+* [CMake](https://cmake.org/)
+* [VTK](https://vtk.org/)
+* [YAMLCPP](https://github.com/jbeder/yaml-cpp)
+* [Blaze](https://bitbucket.org/blaze-lib/blaze/src/master/)
+* [BlazeIterative](https://github.com/STEllAR-GROUP/BlazeIterative)
+* [HPX](https://github.com/STEllAR-GROUP/hpx)
+  * [BOOST](https://www.boost.org/)
+  * [HWLOC](https://www.open-mpi.org/projects/hwloc/)
+  * [Jemalloc](https://github.com/jemalloc/jemalloc) 
 
 ## Building and installation
 ```bash

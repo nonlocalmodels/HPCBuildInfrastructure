@@ -35,5 +35,8 @@ export GCC_VERSION=9.1.0
 # HPX
 export HPX_VERSION=1.3.0
 
+# VTK 
+export VTK_VERSION=7.1.1
+
 # Max number of parallel jobs
 export PARALLEL_BUILD=$(grep -c ^processor /proc/cpuinfo)

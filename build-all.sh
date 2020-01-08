@@ -90,6 +90,11 @@ while [[ -n $3 ]]; do
             export BUILD_TARGET_YAMLCPP=
             shift
         ;;
+        vtk)
+            echo 'Target hpx will build.'
+            export BUILD_TARGET_VTK=
+            shift
+        ;;
         *)
             echo 'Unrecognizable argument passesd.' >&2
             print_usage_abort
@@ -110,6 +115,7 @@ if [[ -z ${!BUILD_TARGET_@} ]]; then
     export BUILD_TARGET_BLAZE=
     export BUILD_TARGET_BLAZE_ITERATIVE=
     export BUILD_TARGET_YAMLCPP=
+    export BUILD_TARGET_VTK=
 fi
 
 ################################################################################
@@ -189,6 +195,11 @@ source gcc-config.sh
 (
     echo "Building YAMLCPP"
     ./build-yamlcpp.sh
+)
+[[ -n ${BUILD_TARGET_VTK+x} ]] && \
+(
+    echo "Building VTK"
+    ./build-vtk.sh
 )
 ################################################################################
 # Octo-tiger
