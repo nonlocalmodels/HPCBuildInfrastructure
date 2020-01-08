@@ -7,7 +7,7 @@ export SOURCE_ROOT=${POWERTIGER_ROOT}/src
 # Package Configuration
 ################################################################################
 # BLAZE
-export BLAZE_VERSION=
+export BLAZE_VERSION=3.5
 
 # BLAZE Iterative
 export BLAZE_ITERATIVE_VERSION=
