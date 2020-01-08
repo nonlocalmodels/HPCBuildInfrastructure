@@ -7,8 +7,8 @@ print_usage_abort ()
 {
     cat <<EOF >&2
 SYNOPSIS
-    ${0} {Release|RelWithDebInfo|Debug} {with-cuda|without-cuda}
-    [cmake|gcc|boost|hdf5|silo|hwloc|jemalloc|vc|hpx|octotiger|openmpi ...]
+    ${0} {Release|RelWithDebInfo|Debug} {with-gcc|without-gcc}
+    [cmake|gcc|boost|hwloc|jemalloc|vtk|hpx|octotiger|yamlcpp|blaze|blazeItertaive ...]
 DESCRIPTION
     Download, configure, build, and install Octo-tiger and its dependencies or
     just the specified target.
@@ -27,30 +27,19 @@ else
     print_usage_abort
 fi
 
-if [[ "$2" == "without-cuda" ]]; then
-    export OCT_WITH_CUDA=OFF
-    echo "CUDA Support: Disabled"
-elif [[ "$2" == "with-cuda" ]]; then
-    export OCT_WITH_CUDA=ON
-    echo "CUDA Support: Enabled"
+if [[ "$2" == "without-gcc" ]]; then
+    export NL_WITH_GCC=OFF
+    echo " Using the system gcc"
+elif [[ "$2" == "with-gcc" ]]; then
+    export NL_WITH_GCC=ON
+    echo "Using the compiled gcc"
 else
-    echo 'CUDA support must be specified and has to be "with-cuda" or "without-cuda"' >&2
+    echo 'GCC support must be specified and has to be "with-gcc" for using the compiled gcc or "without-gcc" for using the system one' >&2
     print_usage_abort
 fi
 
-if [[ "$3" == "without-mpi" ]]; then
-    export OCT_WITH_PARCEL=OFF
-    echo "Parcelport disabled"
-elif [[ "$3" == "with-mpi" ]]; then
-    export OCT_WITH_PARCEL=ON
-    echo "Parcelport enabled"
-else
-    echo 'Parcelport support must be provided and has to be "with-mpi" or "without-mpi"' >&2
-    print_usage_abort
-fi
-
-while [[ -n $4 ]]; do
-    case $4 in
+while [[ -n $3 ]]; do
+    case $3 in
         cmake)
             echo 'Target cmake will build.'
             export BUILD_TARGET_CMAKE=
@@ -105,10 +94,6 @@ if [[ -z ${!BUILD_TARGET_@} ]]; then
     export BUILD_TARGET_HPX=
 fi
 
-if [[ -d "/etc/opt/cray/release/" ]]; then
-    unset BUILD_TARGET_GCC
-    unset BUILD_TARGET_OPENMPI
-fi
 ################################################################################
 # Diagnostics
 ################################################################################
@@ -143,40 +128,19 @@ mkdir -p ${SOURCE_ROOT} ${INSTALL_ROOT}
     echo "Building CMake"
     ./build-cmake.sh
 )
+
 export CMAKE_COMMAND=${INSTALL_ROOT}/cmake/bin/cmake
 
 ################################################################################
 # Dependencies
 ################################################################################
-# Set GCC Environment Variables
 source gcc-config.sh
 
-[[ -n ${BUILD_TARGET_OPENMPI+x} ]] && \
-(
-    echo "Building Openmpi"
-    ./build-openmpi.sh
-)
-
-if [[ ${OCT_WITH_PARCEL} == ON  ]]; then    
-   if [[ -d ${INSTALL_ROOT}/openmpi  ]]; then
-	source openmpi-config.sh
-   fi
-fi
 
 [[ -n ${BUILD_TARGET_BOOST+x} ]] && \
 (
     echo "Building Boost"
     ./build-boost.sh
-)
-[[ -n ${BUILD_TARGET_HDF5+x} ]] && \
-(
-    echo "Building HDF5"
-    ./build-hdf5.sh
-)
-[[ -n ${BUILD_TARGET_SILO+x} ]] && \
-(
-    echo "Building Silo"
-    ./build-silo.sh
 )
 [[ -n ${BUILD_TARGET_HWLOC+x} ]] && \
 (
@@ -187,11 +151,6 @@ fi
 (
     echo "Building jemalloc"
     ./build-jemalloc.sh
-)
-[[ -n ${BUILD_TARGET_VC+x} ]] && \
-(
-    echo "Building Vc"
-    ./build-Vc.sh
 )
 [[ -n ${BUILD_TARGET_HPX+x} ]] && \
 (
