@@ -84,14 +84,12 @@ module load boost/${BOOST_VERSION}-${BOOST_BUILD_TYPE}
 module load cmake/${CMAKE_VERSION}
 module load jemalloc/${JEMALLOC_VERSION}
 module load hwloc/${HWLOC_VERSION}
-module load Vc/${VC_VERSION}-${BUILD_TYPE}
 
 prereq      gcc/${GCC_VERSION}
 prereq      boost/${BOOST_VERSION}-${BOOST_BUILD_TYPE}
 prereq      cmake/${CMAKE_VERSION}
 prereq      jemalloc/${JEMALLOC_VERSION}
 prereq      hwloc/${HWLOC_VERSION}
-prereq      Vc/${VC_VERSION}-${BUILD_TYPE}
 prepend-path    CPATH              \$root/include
 prepend-path    PATH               \$root/bin
 prepend-path    LD_LIBRARY_PATH    \$root/lib
