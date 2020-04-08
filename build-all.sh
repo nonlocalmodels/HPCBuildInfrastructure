@@ -8,7 +8,7 @@ print_usage_abort ()
     cat <<EOF >&2
 SYNOPSIS
     ${0} {Release|RelWithDebInfo|Debug} {with-gcc|without-gcc}
-    [cmake|gcc|boost|hwloc|jemalloc|vtk|hpx|octotiger|yamlcpp|blaze|blazeIterative|nl ...]
+    [cmake|gcc|boost|hwloc|jemalloc|vtk|hpx|yamlcpp|blaze|blazeIterative|nl ...]
 DESCRIPTION
     Download, configure, build, and install Octo-tiger and its dependencies or
     just the specified target.
