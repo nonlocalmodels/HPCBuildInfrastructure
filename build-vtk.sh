@@ -23,7 +23,8 @@ if [[ ! -d ${DIR_INSTALL} ]]; then
         -DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
         -DCMAKE_CXX_FLAGS="${CXXFLAGS}" \
         -DCMAKE_EXE_LINKER_FLAGS="${LDCXXFLAGS}" \
-        -DCMAKE_SHARED_LINKER_FLAGS="${LDCXXFLAGS}" 
+        -DCMAKE_SHARED_LINKER_FLAGS="${LDCXXFLAGS}" \
+        -DVTK_REQUIRE_LARGE_FILE_SUPPORT=ON
         make -j${PARALLEL_BUILD}
         make install
     )

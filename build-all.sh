@@ -10,7 +10,7 @@ SYNOPSIS
     ${0} {Release|RelWithDebInfo|Debug} {with-gcc|without-gcc}
     [cmake|gcc|boost|hwloc|jemalloc|vtk|hpx|yamlcpp|blaze|blazeIterative|nl ...]
 DESCRIPTION
-    Download, configure, build, and install Octo-tiger and its dependencies or
+    Download, configure, build, and install NLMech and its dependencies or
     just the specified target.
 EOF
     exit 1
