@@ -8,7 +8,7 @@ print_usage_abort ()
     cat <<EOF >&2
 SYNOPSIS
     ${0} {Release|RelWithDebInfo|Debug} {with-gcc|without-gcc}
-    [cmake|gcc|boost|hwloc|jemalloc|vtk|hpx|yamlcpp|blaze|blazeIterative|flann|nl ...]
+    [cmake|gcc|boost|hwloc|jemalloc|vtk|hpx|yamlcpp|blaze|blazeIterative|flann|pcl|nl ...]
 DESCRIPTION
     Download, configure, build, and install NLMech and its dependencies or
     just the specified target.
@@ -98,6 +98,11 @@ while [[ -n $3 ]]; do
         flann)
             echo 'Target flann will build.'
             export BUILD_TARGET_FLANN=
+            shift
+        ;;
+        pcl)
+            echo 'Target pcl will build.'
+            export BUILD_TARGET_PCL=
             shift
         ;;
         nl)
@@ -217,8 +222,13 @@ source gcc-config.sh
     echo "Building FLANN"
     ./build-flann.sh
 )
+[[ -n ${BUILD_TARGET_PCL+x} ]] && \
+(
+    echo "Building PCL"
+    ./build-pcl.sh
+)
 ################################################################################
-# Octo-tiger
+# NLMech
 ################################################################################
 [[ -n ${BUILD_TARGET_NL+x} ]] && \
 (
