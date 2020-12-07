@@ -38,5 +38,8 @@ export HPX_VERSION=1.5.0
 # VTK 
 export VTK_VERSION=9.0.1
 
+#FLANN
+export FLANN_VERSION=1.9.1
+
 # Max number of parallel jobs
 export PARALLEL_BUILD=$(grep -c ^processor /proc/cpuinfo)

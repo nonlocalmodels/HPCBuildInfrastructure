@@ -8,7 +8,7 @@ print_usage_abort ()
     cat <<EOF >&2
 SYNOPSIS
     ${0} {Release|RelWithDebInfo|Debug} {with-gcc|without-gcc}
-    [cmake|gcc|boost|hwloc|jemalloc|vtk|hpx|yamlcpp|blaze|blazeIterative|nl ...]
+    [cmake|gcc|boost|hwloc|jemalloc|vtk|hpx|yamlcpp|blaze|blazeIterative|flann|nl ...]
 DESCRIPTION
     Download, configure, build, and install NLMech and its dependencies or
     just the specified target.
@@ -93,6 +93,11 @@ while [[ -n $3 ]]; do
         vtk)
             echo 'Target hpx will build.'
             export BUILD_TARGET_VTK=
+            shift
+        ;;
+        flann)
+            echo 'Target flann will build.'
+            export BUILD_TARGET_FLANN=
             shift
         ;;
         nl)
@@ -206,6 +211,11 @@ source gcc-config.sh
 (
     echo "Building VTK"
     ./build-vtk.sh
+)
+[[ -n ${BUILD_TARGET_FLANN+x} ]] && \
+(
+    echo "Building FLANN"
+    ./build-flann.sh
 )
 ################################################################################
 # Octo-tiger
