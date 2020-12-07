@@ -16,13 +16,13 @@ export BLAZE_ITERATIVE_VERSION=master
 export YAMLCPP_VERSION=0.6.3
 
 # CMAKE
-export CMAKE_VERSION=3.17.4
+export CMAKE_VERSION=3.18.4
 
 # HWLOC
-export HWLOC_VERSION=1.11.12
+export HWLOC_VERSION=2.2.0
 
 # BOOST 
-export BOOST_VERSION=1.68.0
+export BOOST_VERSION=1.73.0
 export BOOST_ROOT=${INSTALL_ROOT}/boost
 export BOOST_BUILD_TYPE=$(echo ${BUILD_TYPE/%WithDebInfo/ease} | tr '[:upper:]' '[:lower:]')
 
@@ -33,10 +33,10 @@ export JEMALLOC_VERSION=5.1.0
 export GCC_VERSION=9.3.0
 
 # HPX
-export HPX_VERSION=1.3.0
+export HPX_VERSION=1.5.0
 
 # VTK 
-export VTK_VERSION=9.1.0
+export VTK_VERSION=9.0.1
 
 # Max number of parallel jobs
 export PARALLEL_BUILD=$(grep -c ^processor /proc/cpuinfo)

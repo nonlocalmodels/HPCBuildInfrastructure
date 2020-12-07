@@ -9,7 +9,7 @@ DIR_SRC=${SOURCE_ROOT}/vtk
 DIR_INSTALL=${INSTALL_ROOT}/vtk
 FILE_MODULE=${INSTALL_ROOT}/modules/vtk/${VTK_VERSION}
 
-DOWNLOAD_URL="https://www.vtk.org/files/release/7.1/VTK-${VTK_VERSION}.tar.gz"
+DOWNLOAD_URL="https://www.vtk.org/files/release/9.0/VTK-${VTK_VERSION}.tar.gz"
 
 if [[ ! -d ${DIR_INSTALL} ]]; then
     (
@@ -17,14 +17,17 @@ if [[ ! -d ${DIR_INSTALL} ]]; then
         cd ${DIR_SRC}
         wget ${DOWNLOAD_URL} 
         tar -xf VTK-${VTK_VERSION}.tar.gz
-        cd VTK-${VTK_VERSION}
+        #cd VTK-${VTK_VERSION}
+        mkdir build
+        cd build 
         ${CMAKE_COMMAND} \
         -DCMAKE_INSTALL_PREFIX=${DIR_INSTALL} \
         -DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
         -DCMAKE_CXX_FLAGS="${CXXFLAGS}" \
         -DCMAKE_EXE_LINKER_FLAGS="${LDCXXFLAGS}" \
         -DCMAKE_SHARED_LINKER_FLAGS="${LDCXXFLAGS}" \
-        -DVTK_REQUIRE_LARGE_FILE_SUPPORT=ON
+        -DVTK_REQUIRE_LARGE_FILE_SUPPORT=ON \
+        ${DIR_SRC}/VTK-${VTK_VERSION}
         make -j${PARALLEL_BUILD}
         make install
     )
