@@ -15,7 +15,7 @@ if [[ ! -d ${DIR_INSTALL} ]]; then
     (
         mkdir -p ${DIR_SRC}
         cd ${DIR_SRC}
-        wget -O- ${DOWNLOAD_URL} | tar xj --strip-components=1
+        wget -O- ${DOWNLOAD_URL} | tar xj --no-same-owner --strip-components=1
         ./autogen.sh
         ./configure --prefix=${DIR_INSTALL}
         make -j${PARALLEL_BUILD}

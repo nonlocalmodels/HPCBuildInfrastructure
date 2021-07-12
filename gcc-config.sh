@@ -7,6 +7,10 @@
 #	export XTPE_LINK_TYPE=dynamic
 #	echo "WARNING!!! You should switch to the gnu compiler env (module switch PrgEnv-cray/5.2.82 PrgEnv-gnu)!!!!!!!"
 #else
+
+export CC=$(which gcc)
+export CXX=$(which g++)
+
 if [[ ${NL_WITH_GCC} == ON  ]]; then 
 	export CC=${INSTALL_ROOT}/gcc/bin/gcc
 	export CXX=${INSTALL_ROOT}/gcc/bin/g++
