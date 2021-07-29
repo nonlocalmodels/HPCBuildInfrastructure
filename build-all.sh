@@ -8,7 +8,7 @@ print_usage_abort ()
     cat <<EOF >&2
 SYNOPSIS
     ${0} {Release|RelWithDebInfo|Debug} {with-gcc|without-gcc}
-    [cmake|gcc|boost|hwloc|jemalloc|vtk|hpx|yamlcpp|blaze|blazeIterative|flann|pcl|nl ...]
+    [cmake|gcc|boost|hwloc|jemalloc|vtk|hpx|yamlcpp|blaze|blazeIterative|flann|pcl|gmsh|nl ...]
 DESCRIPTION
     Download, configure, build, and install NLMech and its dependencies or
     just the specified target.
@@ -105,6 +105,11 @@ while [[ -n $3 ]]; do
             export BUILD_TARGET_PCL=
             shift
         ;;
+        gmsh)
+            echo 'Target gmsh will build.'
+            export BUILD_TARGET_GMSH=
+            shift
+        ;;
         nl)
             echo 'Target hpx will build.'
             export BUILD_TARGET_NL=
@@ -131,6 +136,7 @@ if [[ -z ${!BUILD_TARGET_@} ]]; then
     export BUILD_TARGET_BLAZE_ITERATIVE=
     export BUILD_TARGET_YAMLCPP=
     export BUILD_TARGET_VTK=
+    export BUILD_TARGET_GMSH=
     export BUILD_TARGET_NL=
 fi
 
@@ -226,6 +232,11 @@ source gcc-config.sh
 (
     echo "Building PCL"
     ./build-pcl.sh
+)
+[[ -n ${BUILD_TARGET_GMSH+x} ]] && \
+(
+    echo "Building GMSH"
+    ./build-gmsh.sh
 )
 ################################################################################
 # NLMech

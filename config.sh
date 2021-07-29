@@ -6,6 +6,9 @@ export SOURCE_ROOT=${POWERTIGER_ROOT}/src
 ################################################################################
 # Package Configuration
 ################################################################################
+# NLMech
+export NL_VERSION=main
+
 # BLAZE
 export BLAZE_VERSION=3.5
 
@@ -46,5 +49,9 @@ export PCL_VERSION=1.11.1
 
 #Eigen
 export EIGEN_VERSION=3.2.10
+
+#GMSH
+export GMSH_VERSION=4.7.1
+
 # Max number of parallel jobs
 export PARALLEL_BUILD=$(grep -c ^processor /proc/cpuinfo)
